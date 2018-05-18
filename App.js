@@ -9,18 +9,25 @@ import {
   Platform
 } from 'react-native';
 
+import { AppLoading } from 'expo'
 import ToDo from "./ToDo";
-
 import { ScrollView } from 'react-native-gesture-handler';
 
 const { height, width } = Dimensions.get("window");
 
 export default class App extends React.Component {
   state = {
-    newTodo: ""
+    newTodo: "",
+    loadedToDos: false
   };
   render() {
-    const { newTodo } = this.state;
+    const { newTodo, loadedToDos } = this.state;
+    if(!loadedToDos){
+      return <AppLoading />;
+    }
+    this.componentDidMount = () => {
+      this._loadToDos();
+    }
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
@@ -47,6 +54,9 @@ export default class App extends React.Component {
       newTodo: text
     })
   }
+  _loadToDos = () => {
+
+  };
 }
 
 const styles = StyleSheet.create({

@@ -151,7 +151,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   input: {
-    marginVertical: 20,
+    marginVertical: 15,
     width: width / 2,
+    paddingBottom: 5,
   }
 });
