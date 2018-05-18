@@ -20,13 +20,13 @@ export default class App extends React.Component {
     newTodo: "",
     loadedToDos: false
   };
+  componentDidMount = () => {
+    this._loadToDos();
+  }
   render() {
     const { newTodo, loadedToDos } = this.state;
     if(!loadedToDos){
       return <AppLoading />;
-    }
-    this.componentDidMount = () => {
-      this._loadToDos();
     }
     return (
       <View style={styles.container}>
@@ -41,6 +41,7 @@ export default class App extends React.Component {
             placeholderTextColor={"#999"}
             returnKeyType={"done"}
             autoCorrect={false}
+            onSubmitEditing={this._addToDo}
           />
           <ScrollView contentContainerStyle={styles.toDos}>
             <ToDo text={"Hello I'm a To Do"}/>
@@ -55,8 +56,18 @@ export default class App extends React.Component {
     })
   }
   _loadToDos = () => {
-
+    this.setState({
+      loadedToDos: true
+    })
   };
+  _addToDo = () => {
+    const { newTodo } = this.state;
+    if(newTodo !== ""){
+      this.setState({
+        newToDo: ""
+      })
+    }
+  }
 }
 
 const styles = StyleSheet.create({
